@@ -1,14 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { Text } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import HomePage from "./components/HomePage";
+import { styles } from "./App.styles";
+import { ImageBackground } from "react-native";
+import hot from "./assets/hot.png";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <Text>Hello, World!</Text>
-        <StatusBar style="auto" />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <>
+      <ImageBackground style={styles.backgroundImage} source={hot}>
+        <SafeAreaProvider>
+          <SafeAreaView style={styles.root}>
+            <HomePage />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      </ImageBackground>
+    </>
   );
 }
