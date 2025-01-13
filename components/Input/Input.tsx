@@ -1,17 +1,36 @@
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import { styles } from "./Input.styles";
+import { getOppositeUnit } from "../../utils/temperature";
 
-const Input = ({ defaultValue }: { defaultValue: number }) => {
+const Input = ({
+  temperature,
+  unit,
+  setUnit,
+  handleChangeText,
+}: {
+  temperature: number | null;
+  unit: string;
+  setUnit: (value: string) => void;
+  handleChangeText: (value: string) => void;
+}) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        maxLength={3}
+        maxLength={4}
         placeholder="Temperature.."
-        defaultValue={defaultValue.toString()}
+        keyboardType="numeric"
+        value={temperature?.toString()}
+        onChangeText={handleChangeText}
       />
-      <Text style={styles.unit}>°C</Text>
+      <View style={styles.unit}>
+        <Button
+          title={`°${unit}`}
+          color="#000"
+          onPress={() => setUnit(getOppositeUnit(unit))}
+        />
+      </View>
     </View>
   );
 };
